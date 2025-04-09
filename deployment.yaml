@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iptables-agent
+  labels:
+    app: iptables-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iptables-agent
+  template:
+    metadata:
+      labels:
+        app: iptables-agent
+    spec:
+      hostNetwork: true
+      containers:
+      - name: iptables-agent
+        image: harbor.petru.com/1prueba/iptables-agent:latest
+        securityContext:
+          privileged: true
+        env:
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "kafka-svc:9092"    # Ajusta a la dirección de tu broker Kafka
+        - name: KAFKA_TOPIC
+          value: "firewall-events"
+        - name: KAFKA_GROUP_ID
+          value: "iptables-agent-group"
