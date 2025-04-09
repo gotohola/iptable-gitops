@@ -22,7 +22,7 @@ spec:
           privileged: true
         env:
         - name: KAFKA_BOOTSTRAP_SERVERS
-          value: "kafka.default:9092"    # Ajusta a la dirección de tu broker Kafka
+          value: "10.152.183.62:9092"    # Ajusta a la dirección de tu broker Kafka
         - name: KAFKA_TOPIC
           value: "firewall-events"
         - name: KAFKA_GROUP_ID
