@@ -14,16 +14,16 @@ spec:
       labels:
         app: iptables-agent
     spec:
-      hostNetwork: true
+      # hostPID: true  # Descomenta si necesitas acceso a los procesos del host (opcional)
       containers:
-      - name: iptables-agent
-        image: harbor.petru.com/1prueba/iptables-agent:latest
-        securityContext:
-          privileged: true
-        env:
-        - name: KAFKA_BOOTSTRAP_SERVERS
-          value: "10.152.183.62:9092"    # Ajusta a la dirección de tu broker Kafka
-        - name: KAFKA_TOPIC
-          value: "firewall-events"
-        - name: KAFKA_GROUP_ID
-          value: "iptables-agent-group"
+        - name: iptables-agent
+          image: harbor.petru.com/1prueba/iptables-agent:latest
+          securityContext:
+            privileged: true
+          env:
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka.default.svc.cluster.local:9092"  # Usa nombre DNS del servicio
+            - name: KAFKA_TOPIC
+              value: "firewall-events"
+            - name: KAFKA_GROUP_ID
+              value: "iptables-agent-group"
