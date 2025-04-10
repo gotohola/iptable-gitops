@@ -10,12 +10,10 @@ spec:
       eventName: firewall
   triggers:
     - template:
-        name: kafka-trigger
-        kafka:
-          url: "kafka-controller-0.kafka-controller-headless.default.svc.cluster.local:9092"
-          topic: "firewall-events"
-          partition: 0
-          parameters:
+        name: log-trigger
+        log:
+          intervalSeconds: 1
+          payload:
             - src:
                 dependencyName: firewall-dep
                 dataKey: body
