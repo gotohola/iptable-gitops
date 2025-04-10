@@ -12,11 +12,11 @@ spec:
     - template:
         name: kafka-trigger
         kafka:
-          url: "PLAINTEXT://kafka-controller-0.kafka-controller-headless.default.svc.cluster.local:9092"
+          url: "kafka-controller-0.kafka-controller-headless.default.svc.cluster.local:9092"
           topic: "firewall-events"
           partition: 0
           parameters:
             - src:
                 dependencyName: firewall-dep
-                value: "{{ .Input | quote }}"
+                dataKey: body
               dest: message
