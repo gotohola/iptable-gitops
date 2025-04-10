@@ -15,8 +15,5 @@ spec:
           url: "PLAINTEXT://kafka-controller-0.kafka-controller-headless.default.svc.cluster.local:9092"
           topic: "firewall-events"
           partition: 0
-          payload:
-            - src:
-                dependencyName: firewall-dep
-                dataKey: body
-              dest: message
+          dataTemplate:
+            message: "{{ .Input | quote }}"
