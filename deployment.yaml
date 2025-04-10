@@ -22,7 +22,7 @@ spec:
             privileged: true
           env:
             - name: KAFKA_BOOTSTRAP_SERVERS
-              value: "kafka.default.svc.cluster.local:9092"  # Usa nombre DNS del servicio
+              value: "kafka-controller-0.kafka-controller-headless.default.svc.cluster.local:9092"
             - name: KAFKA_TOPIC
               value: "firewall-events"
             - name: KAFKA_GROUP_ID
