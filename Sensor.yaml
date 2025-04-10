@@ -7,17 +7,16 @@ spec:
   dependencies:
     - name: firewall-dep
       eventSourceName: firewall-webhook-es
-      eventName: firewall  # coincide con la clave en "webhook: firewall:" del EventSource
+      eventName: firewall
   triggers:
     - template:
         name: kafka-trigger
         kafka:
-          url: "PLAINTEXT://kafka-svc:9092"   # Ajustar a la dirección de tu broker Kafka en k8s
+          url: "PLAINTEXT://kafka.default.svc.cluster.local:9092"
           topic: "firewall-events"
           partition: 0
-          parameters:
+          payload:
             - src:
                 dependencyName: firewall-dep
                 dataKey: body
               dest: message
-      # (opcional) si necesitas auth, ssl, etc. lo añades aquí
